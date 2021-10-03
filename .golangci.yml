@@ -1,0 +1,37 @@
+run:
+  deadline: 5m
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  # disable some excludes that golangci-lint has by default. see https://github.com/golangci/golangci-lint
+  exclude-use-default: false
+  exclude-rules:
+      # Disable duplicate code, errcheck and unused params validation in testing
+      - path: _test\.go$
+        linters:
+          - dupl
+          - unparam
+          - errcheck
+          - gosec
+          - gosimple
+          - misspell
+      # These checks are not really useful
+      - linters:
+        - errcheck
+        text: "Error return value of `.*(Close|Remove)` is not checked"
+
+linters-settings:
+  staticcheck:
+    checks: ["S1002","S1004","S1007","S1009","S1010","S1012","S1019","S1020","S1021","S1024","S1030","SA2*","SA3*","SA4009","SA5*","SA6000","SA6001","SA6005","-ST1000"]
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - goimports
+    - golint
+    - staticcheck
+    - misspell
+    - gosimple
+    - gosec
